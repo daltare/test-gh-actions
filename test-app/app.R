@@ -13,7 +13,7 @@ library(shiny)
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Old Faithful Geyser Data"),
+    titlePanel("Old Faithful Geyser Data - GitHub Action Deployment"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
@@ -27,7 +27,8 @@ ui <- fluidPage(
 
         # Show a plot of the generated distribution
         mainPanel(
-           plotOutput("distPlot")
+           plotOutput("distPlot"),
+           p('This text was deployed via a GitHub Action')
         )
     )
 )
