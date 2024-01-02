@@ -2,11 +2,9 @@
 
 ### Shiny App Deployment
 
-Use `usethis::use_github_action("shiny-deploy")`, following these instructions to test using GitHub Actions to deploy updates to a Shiny web application: <https://github.com/r-lib/actions/tree/v2/examples#shiny-app-deployment>
+This is a test/example of how to use GitHub Actions to deploy updates to a Shiny web application. To set up this action, run the command: `usethis::use_github_action("shiny-deploy")`, and follow these instructions: <https://github.com/r-lib/actions/tree/v2/examples#shiny-app-deployment>
 
-The deployed app is here: <https://daltare.shinyapps.io/test-app/>
-
-This automatically deploys the Shiny App in this repository whenever any changes are pushed to this repository (i.e., not deploying the app from RStudio). This should ensure that the code shown here always matches what's shown in the deployed app. Note that:
+This automatically deploys the Shiny App in this repository whenever any changes are pushed to this repository (i.e., the app is not manually deployed/published by the user from RStudio). This should ensure that the code shown here always matches what's shown in the deployed app. The deployed app is [here](https://daltare.shinyapps.io/test-app/). Note that:
 
 -   The GitHub Action will run either (1) when there are changes pushed directly to the `main` branch or (2) whenever a pull request is accepted (into the main branch) (it will not run when changes are pushed to a different branch)
 -   The GitHub Action will run whenever there are changes to any file in the `main` branch (not just when the `app.R` file or other files used by the app are changed)
