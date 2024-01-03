@@ -4,10 +4,13 @@
 
 This is a test/example of how to use GitHub Actions to deploy updates to a Shiny web application. To set up this action, run the command: `usethis::use_github_action("shiny-deploy")`, and follow these instructions: <https://github.com/r-lib/actions/tree/v2/examples#shiny-app-deployment>
 
-This automatically deploys the Shiny App in this repository whenever any changes are pushed to the `test-app` directory in this repository (i.e., the app is not manually deployed/published by the user from RStudio). This should ensure that the code shown here always matches what's shown in the deployed app. The deployed app is [here](https://daltare.shinyapps.io/test-app/). Note that:
+This automatically deploys the Shiny App in this repository (whose source code is in the `test-app/app.R` file) whenever any changes are pushed to the `test-app` directory (the deployed app is [here](https://daltare.shinyapps.io/test-app/)). In other words, the app is not manually deployed/published by the user from RStudio. This should ensure that the code shown in this repository always matches what's shown in the deployed app.
 
--   The GitHub Action will run either (1) when there are changes pushed directly to the `main` branch or (2) whenever a pull request is accepted (into the main branch) (it will not run when changes are pushed to a different branch)
--   The GitHub Action will only run when there are changes to any file in the `test-app` directory in the `main` branch (not just when the `app.R` file changes); you can also set up the action to run whenever there are changes to any file in the `main` branch (not just the `test-app` directory) by removing the line `paths: ['test-app/**']` from the `shiny-deploy.yaml` file (in the `.github/workflows/` directory)
+Note that:
+
+-   The GitHub Action will run either (1) when there are changes pushed directly to the `main` branch or (2) whenever a pull request is accepted into the `main` branch (in both cases, it will only run if files in the `test-app` directory are changed). It will not run when changes are pushed to a different branch.
+-   The GitHub Action will only run when there are changes to any file in the `test-app` directory in the `main` branch (not just when the `app.R` file changes). Note that you can also set up the action to run whenever there are changes to any file in the `main` branch (not just the `test-app` directory) by removing the line `paths: ['test-app/**']` from the `shiny-deploy.yaml` file (in the `.github/workflows/` directory).
+-   Setting up this action requires use of the [`renv`](https://rstudio.github.io/renv/index.html) R package, which creates the `renv.lock` file (i.e. the lockfile). That means the developer will need to do things like call `renv::snapshot()` after packages are added or updated (which will record the packages and their sources in the lockfile), and collaborators can call `renv::restore()` (to get the specific package versions recorded in the lockfile). For more information, see [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
 
 #### Shiny App Deployment Notes
 
