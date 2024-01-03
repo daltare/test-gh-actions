@@ -4,10 +4,10 @@
 
 This is a test/example of how to use GitHub Actions to deploy updates to a Shiny web application. To set up this action, run the command: `usethis::use_github_action("shiny-deploy")`, and follow these instructions: <https://github.com/r-lib/actions/tree/v2/examples#shiny-app-deployment>
 
-This automatically deploys the Shiny App in this repository whenever any changes are pushed to this repository (i.e., the app is not manually deployed/published by the user from RStudio). This should ensure that the code shown here always matches what's shown in the deployed app. The deployed app is [here](https://daltare.shinyapps.io/test-app/). Note that:
+This automatically deploys the Shiny App in this repository whenever any changes are pushed to the `test-app` directory in this repository (i.e., the app is not manually deployed/published by the user from RStudio). This should ensure that the code shown here always matches what's shown in the deployed app. The deployed app is [here](https://daltare.shinyapps.io/test-app/). Note that:
 
 -   The GitHub Action will run either (1) when there are changes pushed directly to the `main` branch or (2) whenever a pull request is accepted (into the main branch) (it will not run when changes are pushed to a different branch)
--   The GitHub Action will run whenever there are changes to any file in the `main` branch (not just when the `app.R` file or other files used by the app are changed)
+-   The GitHub Action will only run when there are changes to any file in the `test-app` directory in the `main` branch (not just when the `app.R` file changes); you can also set up the action to run whenever there are changes to any file in the `main` branch (not just the `test-app` directory) by removing the line `paths: ['test-app/**']` from the `shiny-deploy.yaml` file (in the `.github/workflows/` directory)
 
 #### Shiny App Deployment Notes
 
@@ -15,7 +15,10 @@ In addition to setting up the shinyapps.io username/token/secret as as GitHub Se
 
 -   Add app name and account name (in the `APPNAME: your-app-name` and `ACCOUNT: your-account-name` lines)
 -   Set app directory path in `rsconnect::deployApp()` function - this was done by adding an `APP_DIR` variable, and adding the `appDir = "${{ env.APP_DIR }}"` argument to `rsconnect::deployApp()`
+-   Add `paths: ['test-app/**']` in the header info (under the `on:` part), so that the action is only run when changes are made to files in the directory that hold the application files (`test-app`), rather than running the deployment action whenever any file in the repository is changed (note that this is not required, and may not always be the best course of action)
 -   Set `forceUpdate = TRUE` in `rsconnect::deployApp()` function (may not be strictly necessary)
+
+To find examples of how other users on GitHub set up their `shiny-deploy.yaml` file, use the following search on GitHub (and modify as needed): `path:shiny-deploy.yaml` (can also add search details like `user:`, `org:`, etc.)
 
 ### Lintr / Styler
 
