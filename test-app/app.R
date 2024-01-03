@@ -28,8 +28,9 @@ ui <- fluidPage(
         # Show a plot of the generated distribution
         mainPanel(
            plotOutput("distPlot"),
-           p('This text was deployed via a GitHub Action'),
-           p('New text added in add-text branch')
+           p('This text was deployed via a GitHub Action.'),
+           p('New text added in add-text branch, and modified with a second 
+             pull request.')
         )
     )
 )
