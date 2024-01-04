@@ -1,10 +1,12 @@
-## GitHub Actions Testing
+# GitHub Actions Testing
 
 This repository has some examples used to test different GitHub Actions.
 
-Note that this project uses the [`renv`](https://rstudio.github.io/renv/index.html) R package, which is required for the Shiny App Deployment action (the `renv` package creates the `renv.lock` file, i.e. the lockfile). That means the developer will need to do things like call `renv::install()` to add packages, [`renv::update()`](https://rstudio.github.io/renv/reference/update.html) to update package versions, and `renv::snapshot()` after packages are added or updated (which will record the packages and their sources in the lockfile), and collaborators can call `renv::restore()` (to get the specific package versions recorded in the lockfile). The documentation notes that if you\'re making major changes to a project that you haven\'t worked on for a while, it\'s often a good idea to start with an [`renv::update()`](https://rstudio.github.io/renv/reference/update.html) before making any changes to the code. For more information, see [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
+Note that this project uses the [`renv`](https://rstudio.github.io/renv/index.html) R package, which is required for the Shiny App Deployment action (the `renv` package creates the `renv.lock` file, i.e. the lockfile). That means the developer will need to do things like call `renv::install()` to add packages, [`renv::update()`](https://rstudio.github.io/renv/reference/update.html) to update package versions, and `renv::snapshot()` after packages are added or updated (which will record the packages and their sources in the lockfile), and collaborators can call `renv::restore()` (to get the specific package versions recorded in the lockfile). The documentation notes that if you're making major changes to a project that you haven't worked on for a while, it's often a good idea to start with an [`renv::update()`](https://rstudio.github.io/renv/reference/update.html) before making any changes to the code. For more information, see [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
 
-### Shiny App Deployment
+------------------------------------------------------------------------
+
+## Shiny App Deployment
 
 This is a test/example of how to use GitHub Actions to deploy updates to a Shiny web application. To set up this action, run the command: `usethis::use_github_action("shiny-deploy")`, and follow these instructions: <https://github.com/r-lib/actions/tree/v2/examples#shiny-app-deployment>
 
@@ -16,7 +18,7 @@ Note that:
 -   The GitHub Action will only run when there are changes to any file in the `test-app` directory in the `main` branch (not just when the `app.R` file changes). Note that you can also set up the action to run whenever there are changes to any file in the `main` branch (not just the `test-app` directory) by removing the line `paths: ['test-app/**']` from the `shiny-deploy.yaml` file (in the `.github/workflows/` directory).
 -   Setting up this action requires use of the [`renv`](https://rstudio.github.io/renv/index.html) R package. See above for more information about how to work with that package.
 
-#### Shiny App Deployment Notes
+### Shiny App Deployment Notes
 
 In addition to setting up the shinyapps.io username/token/secret as as GitHub Secrets and setting up `renv` (all described in the instructions at the link above), I had to manually change a few things in the `.github/workflows/shiny-deploy.yaml` template file that was created by `usethis::use_github_action("shiny-deploy")`, including:
 
@@ -27,13 +29,17 @@ In addition to setting up the shinyapps.io username/token/secret as as GitHub Se
 
 To find examples of how other users on GitHub set up their `shiny-deploy.yaml` file, use the following search on GitHub (and modify as needed): `path:shiny-deploy.yaml` (can also add search details like `user:`, `org:`, etc.)
 
-### Lintr / Styler
+------------------------------------------------------------------------
+
+## Lintr / Styler
 
 -   Lint Project: <https://github.com/r-lib/actions/tree/v2/examples#lint-project-workflow>
 -   Styler (maybe just for package?): <https://github.com/r-lib/actions/tree/v2/examples#style-package>
 -   Styler - on pull request, with comment: <https://github.com/r-lib/actions/tree/v2/examples#commands-workflow>
 
-### Quarto
+------------------------------------------------------------------------
+
+## Quarto
 
 Followed instructions on [this page](https://quarto.org/docs/publishing/github-pages.html), as follows:
 
