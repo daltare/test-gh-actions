@@ -48,6 +48,6 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
-# Quarto
+# Quarto - Only works if quarto project is at the top level of this repository
 /.quarto/
 /_site/
