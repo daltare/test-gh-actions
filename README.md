@@ -45,7 +45,7 @@ Followed instructions on [this page](https://quarto.org/docs/publishing/github-p
 
 -   Start [here](https://quarto.org/docs/publishing/github-pages.html#publish-command) to set up the `gh-pages` branch in Git / GitHub and format `.gitignore` to ignore rendered directories
 -   Then follow instructions [here](https://quarto.org/docs/publishing/github-pages.html#github-action) to:
-    -   [Freeze computations](https://quarto.org/docs/publishing/github-pages.html#freezing-computations)
+    -   [Freeze computations](https://quarto.org/docs/publishing/github-pages.html#freezing-computations) -- only needed if your document(s) includes computation (e.g. with R or python code) that you want to execute locally rather that via the GitHub Action (e.g., if the computations are extensive, have external dependencies or side effects, etc.)
     -   Set up GitHub [Publish Action](https://quarto.org/docs/publishing/github-pages.html#publish-action), including:
         -   Publish manually (once)
         -   Add the `.github/workflows/publish.yml` file
