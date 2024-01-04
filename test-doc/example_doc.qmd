@@ -12,7 +12,9 @@ bibliography: references.bib
 
 ## Background {#sec-background}
 
-This document is a test. Below is some example text.
+This document is a test. Below is some example text. 
+
+Text added for manual publishing action.
 
 This project uses the [R programming language](https://www.R-project.org/) [@R] to estimate characteristics of any given 'target' spatial area(s) (e.g., neighborhoods, project boundaries, water supplier service areas, etc.), based on data from a source dataset containing the characteristic data of interest (e.g., census data, CalEnvrioScreen scores, etc.) whose boundaries overlap but don't necessarily align with the target area(s). It also provides some brief background on the various types of data available from the U.S Census Bureau, and links to a few places to find more in-depth information.
 
