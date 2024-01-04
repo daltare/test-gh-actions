@@ -1,5 +1,9 @@
 ## GitHub Actions Testing
 
+This repository has some examples used to test different GitHub Actions.
+
+Note that this project uses the [`renv`](https://rstudio.github.io/renv/index.html) R package, which is required for the Shiny App Deployment action (the `renv` package creates the `renv.lock` file, i.e. the lockfile). That means the developer will need to do things like call `renv::install()` to add packages, [`renv::update()`](https://rstudio.github.io/renv/reference/update.html) to update package versions, and `renv::snapshot()` after packages are added or updated (which will record the packages and their sources in the lockfile), and collaborators can call `renv::restore()` (to get the specific package versions recorded in the lockfile). The documentation notes that if you\'re making major changes to a project that you haven\'t worked on for a while, it\'s often a good idea to start with an [`renv::update()`](https://rstudio.github.io/renv/reference/update.html) before making any changes to the code. For more information, see [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
+
 ### Shiny App Deployment
 
 This is a test/example of how to use GitHub Actions to deploy updates to a Shiny web application. To set up this action, run the command: `usethis::use_github_action("shiny-deploy")`, and follow these instructions: <https://github.com/r-lib/actions/tree/v2/examples#shiny-app-deployment>
@@ -10,7 +14,7 @@ Note that:
 
 -   The GitHub Action will run either (1) when there are changes pushed directly to the `main` branch or (2) whenever a pull request is accepted into the `main` branch (in both cases, it will only run if files in the `test-app` directory are changed). It will not run when changes are pushed to a different branch.
 -   The GitHub Action will only run when there are changes to any file in the `test-app` directory in the `main` branch (not just when the `app.R` file changes). Note that you can also set up the action to run whenever there are changes to any file in the `main` branch (not just the `test-app` directory) by removing the line `paths: ['test-app/**']` from the `shiny-deploy.yaml` file (in the `.github/workflows/` directory).
--   Setting up this action requires use of the [`renv`](https://rstudio.github.io/renv/index.html) R package, which creates the `renv.lock` file (i.e. the lockfile). That means the developer will need to do things like call `renv::snapshot()` after packages are added or updated (which will record the packages and their sources in the lockfile), and collaborators can call `renv::restore()` (to get the specific package versions recorded in the lockfile). For more information, see [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
+-   Setting up this action requires use of the [`renv`](https://rstudio.github.io/renv/index.html) R package. See above for more information about how to work with that package.
 
 #### Shiny App Deployment Notes
 
@@ -31,4 +35,18 @@ To find examples of how other users on GitHub set up their `shiny-deploy.yaml` f
 
 ### Quarto
 
--   <https://github.com/quarto-dev/quarto-actions>
+Followed instructions on [this page](https://quarto.org/docs/publishing/github-pages.html), as follows:
+
+-   Start [here](https://quarto.org/docs/publishing/github-pages.html#publish-command) to set up the `gh-pages` branch in Git / GitHub and format `.gitignore` to ignore rendered directories
+-   Then follow instructions [here](https://quarto.org/docs/publishing/github-pages.html#github-action) to:
+    -   [Freeze computations](https://quarto.org/docs/publishing/github-pages.html#freezing-computations)
+    -   Set up GitHub [Publish Action](https://quarto.org/docs/publishing/github-pages.html#publish-action), including:
+        -   Publish manually (once)
+        -   Add the `.github/workflows/publish.yml` file
+
+Note that for this example I modified the `.github/workflows/publish.yml` file as follows (you won't need to do this if your Quarto project is at the top level of your repository):
+
+-   Added `paths: ['test-doc/**']` in the header info (under the `on:` section), so that the GitHub Action only runs when changes are made to files in the `test-doc` directory (and not other files in the repository) (note that this isn't strictly necessary, it just reduces un-needed runs of the GitHub Action)
+-   Added `path: test-doc` under the `Render and Publish` job section, to indicate the subdirectory where the quarto project is published from
+
+More information on Quarto-related GitHub Actions is available here: <https://github.com/quarto-dev/quarto-actions>
