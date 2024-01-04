@@ -1,2 +1,3 @@
+# May not be needed if these are included in the gitignore file at the top level of the repository (but make sure they point to this sub-directory, or use */ to look in any sub-directory)
 /.quarto/
 /_site/

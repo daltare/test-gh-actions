@@ -48,6 +48,6 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
-# Quarto - Only works if quarto project is at the top level of this repository
-/.quarto/
-/_site/
+# Quarto files - not used here because they are also included in a gitignore file in the test-doc sub-directory -- note: can also use */ (e.g.: */_site) to look in any sub-directory
+# test-doc/.quarto/
+# test-doc/_site/
