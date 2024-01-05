@@ -2,7 +2,14 @@
 
 This repository has some examples used to test different GitHub Actions.
 
-Note that this project uses the [`renv`](https://rstudio.github.io/renv/index.html) R package, which is required for the Shiny App Deployment action (the `renv` package creates the `renv.lock` file, i.e. the lockfile). That means the developer will need to do things like call `renv::install()` to add packages, [`renv::update()`](https://rstudio.github.io/renv/reference/update.html) to update package versions, and `renv::snapshot()` after packages are added or updated (which will record the packages and their sources in the lockfile), and collaborators can call `renv::restore()` (to get the specific package versions recorded in the lockfile). The documentation notes that if you're making major changes to a project that you haven't worked on for a while, it's often a good idea to start with an [`renv::update()`](https://rstudio.github.io/renv/reference/update.html) before making any changes to the code. For more information, see [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
+Note that this project uses the [`renv`](https://rstudio.github.io/renv/index.html) R package, which is required for the Shiny App Deployment action (the `renv` package creates the `renv.lock` file, i.e. the lockfile).
+
+-   Call [`renv::status()`](https://rstudio.github.io/renv/reference/status.html) to check the status and fix any issues that arise (using the commands below)
+-   Developers can call [`renv::install()`](https://rstudio.github.io/renv/reference/install.html) to add packages, [`renv::update()`](https://rstudio.github.io/renv/reference/update.html) to update package versions, and [`renv::snapshot()`](https://rstudio.github.io/renv/reference/snapshot.html) after packages are added or updated (which will record the packages and their sources in the lockfile)
+-   Collaborators can call [`renv::restore()`](https://rstudio.github.io/renv/reference/restore.html) (to get the specific package versions recorded in the lockfile).
+-   The documentation notes that if you're making major changes to a project that you haven't worked on for a while, it's often a good idea to start with an [`renv::update()`](https://rstudio.github.io/renv/reference/update.html) before making any changes to the code.
+
+For more information, see [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html).
 
 ------------------------------------------------------------------------
 
@@ -46,11 +53,17 @@ Followed instructions on [this page](https://quarto.org/docs/publishing/github-p
 -   Start [here](https://quarto.org/docs/publishing/github-pages.html#publish-command) to set up the `gh-pages` branch in Git / GitHub and format `.gitignore` to ignore rendered directories
 -   Then follow instructions [here](https://quarto.org/docs/publishing/github-pages.html#github-action) to:
     -   [Freeze computations](https://quarto.org/docs/publishing/github-pages.html#freezing-computations) -- only needed if your document(s) includes computation (e.g. with R or python code) that you want to execute locally rather that via the GitHub Action (e.g., if the computations are extensive, have external dependencies or side effects, etc.)
+    -   Re-render the full project: in a terminal within the quarto project directory, run the command: `quarto render` (DON'T FORGET THIS STEP)
     -   Set up GitHub [Publish Action](https://quarto.org/docs/publishing/github-pages.html#publish-action), including:
-        -   Publish manually (once)
-        -   Add the `.github/workflows/publish.yml` file
+        -   Publish manually (once): in a terminal within the quarto project directory, run the command: `quarto publish gh-pages`
+        -   Ensure that GitHub Actions has permission to write to the repository: go to repository *Settings* ➝ *Actions (General)* ➝ *Workflow permissions* ➝ check the "Read and write permissions" box
+        -   Add the `.github/workflows/publish.yml` file, from [here](https://quarto.org/docs/publishing/github-pages.html#example-knitr-with-renv) (note: can use the publish.yaml version [here](https://quarto.org/docs/publishing/github-pages.html#publish-action) if your project doesn't use the `renv` package or execute computational code)
 
-Note that for this example I modified the `.github/workflows/publish.yml` file as follows (you won't need to do this if your Quarto project is at the top level of your repository):
+### Quarto Deployment Notes
+
+Since this deployment uses the [`freeze` option for computational documents](https://quarto.org/docs/projects/code-execution.html#freeze), you should re-render the document locally before pushing changes to GitHub (and also include the files in the `_freeze` directory when pushing to github). Note that re-rendering the document locally will update the local copy of the html document in the `_site` directory, but it won't push/publish any changes to github (also note that the `_site` directory is not tracked by Git / GitHub -- it's ignored via `.gitignore`). To update the published version, you have to push the updated `.qmd` file to GitHub (along with any changes in the `_freeze` directory).
+
+Also, for this example I modified the `.github/workflows/publish.yml` file as follows (you won't need to do this if your Quarto project is at the top level of your repository):
 
 -   Added `paths: ['test-doc/**']` in the header info (under the `on:` section), so that the GitHub Action only runs when changes are made to files in the `test-doc` directory (and not other files in the repository) (note that this isn't strictly necessary, it just reduces un-needed runs of the GitHub Action)
 -   Added `path: test-doc` under the `Render and Publish` job section, to indicate the subdirectory where the quarto project is published from
