@@ -18,7 +18,7 @@
     "href": "example_doc.html#sec-setup",
     "title": "Example Quarto Document Publishing",
     "section": "2 Setup",
-    "text": "2 Setup\nThe code block below loads required packages for this analysis, and sets some user-defined options and defaults.\n\n# packages ----\nlibrary(tidycensus)\nlibrary(tigris)\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(janitor)\nlibrary(here)\n# library(units)\n# library(areal)\nlibrary(Polychrome)\n# library(knitr)\n# library(kableExtra)\n# library(tmap)\n# library(patchwork)\n# library(scales)\n# library(digest)\n\n# options ----\noptions(scipen = 999) # turn off scientific notation\noptions(tigris_use_cache = TRUE) # use data caching for tigris\n\n# reference system ----\ncrs_projected &lt;- 3310 # set a common projected coordinate reference system to be used throughout this analysis - see: https://epsg.io/3310"
+    "text": "2 Setup\nThe code block below loads required packages for this analysis, and sets some user-defined options and defaults.\n\n# packages ----\nlibrary(tidycensus)\nlibrary(tigris)\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(janitor)\nlibrary(here)\nlibrary(Polychrome)\n\n# options ----\noptions(scipen = 999) # turn off scientific notation\noptions(tigris_use_cache = TRUE) # use data caching for tigris\n\n# reference system ----\ncrs_projected &lt;- 3310 # set a common projected coordinate reference system to be used throughout this analysis - see: https://epsg.io/3310"
   },
   {
     "objectID": "example_doc.html#sec-system-boundaries",
