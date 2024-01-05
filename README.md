@@ -67,9 +67,12 @@ Followed instructions on [this page](https://quarto.org/docs/publishing/github-p
 
 Since this deployment uses the [`freeze` option for computational documents](https://quarto.org/docs/projects/code-execution.html#freeze), you should re-render the document locally before pushing changes to GitHub (and also include the files in the `_freeze` directory when pushing to github). Note that re-rendering the document locally will update the local copy of the html document in the `_site` directory, but it won't push/publish any changes to github (also note that the `_site` directory is not tracked by Git / GitHub, because it's ignored via `.gitignore`). To update the published version, you have to push the updated `.qmd` file to GitHub (along with any changes in the `_freeze` directory).
 
-Also, for this example I modified the `.github/workflows/publish.yml` file as follows (you won't need to do this if your Quarto project is at the top level of your repository):
+Also, for this example I modified the `.github/workflows/publish.yml` file as follows:
 
 -   Added `paths: ['test-doc/**']` in the header info (under the `on:` section), so that the GitHub Action only runs when changes are made to files in the `test-doc` directory (and not other files in the repository) (note that this isn't strictly necessary, it just reduces un-needed runs of the GitHub Action)
 -   Added `path: test-doc` under the `Render and Publish` job section, to indicate the subdirectory where the quarto project is published from
+    -   Not needed if your Quarto project is at the top level of your repository
+-   Changed `runs-on: ubuntu-latest` (commented this out) to `runs-on: windows-latest`
+    -   This is not strictly necessary, but if running compuational code (e.g., R or Python) via GitHub Action (i.e., without the `freeze` option described above) this may avoid errors with loading packages listed in the `renv.lock` file when the GitHub action runs
 
 More information on Quarto-related GitHub Actions is available here: <https://github.com/quarto-dev/quarto-actions>
