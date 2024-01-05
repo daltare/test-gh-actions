@@ -1,1 +1,1 @@
-Sitemap: https://daltare.github.io/test-gh-actions/sitemap.xml
+Sitemap: https://github.com/daltare/test-gh-actions/sitemap.xml
