@@ -32,7 +32,7 @@ ui <- fluidPage(
            p('New text added in add-text branch, and modified with a second 
              pull request.'),
            p('Text added after creating the quarto doc and adding a lot of packages to renv, and commenting out use-public-rspm: true
-             from the GH action.')
+             from the GH action. Trying the GH action on windows.')
         )
     )
 )
