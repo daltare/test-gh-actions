@@ -30,7 +30,8 @@ ui <- fluidPage(
            plotOutput("distPlot"),
            p('This text was deployed via a GitHub Action.'),
            p('New text added in add-text branch, and modified with a second 
-             pull request.')
+             pull request.'),
+           p('Text added after creating the quarto doc and adding a lot of packages to renv.')
         )
     )
 )
