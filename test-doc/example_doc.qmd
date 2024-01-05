@@ -35,15 +35,7 @@ library(tidyverse)
 library(sf)
 library(janitor)
 library(here)
-# library(units)
-# library(areal)
 library(Polychrome)
-# library(knitr)
-# library(kableExtra)
-# library(tmap)
-# library(patchwork)
-# library(scales)
-# library(digest)
 
 # options ----
 options(scipen = 999) # turn off scientific notation
