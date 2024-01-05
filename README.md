@@ -33,6 +33,8 @@ In addition to setting up the shinyapps.io username/token/secret as as GitHub Se
 -   Set app directory path in `rsconnect::deployApp()` function - this was done by adding an `APP_DIR` variable, and adding the `appDir = "${{ env.APP_DIR }}"` argument to `rsconnect::deployApp()`
 -   Add `paths: ['test-app/**']` in the header info (under the `on:` part), so that the action is only run when changes are made to files in the directory that hold the application files (`test-app`), rather than running the deployment action whenever any file in the repository is changed (note that this is not required, and may not always be the best course of action)
 -   Set `forceUpdate = TRUE` in `rsconnect::deployApp()` function (may not be strictly necessary)
+-   Commented out `with: | use-public-rspm: true` (due to issues with loading packages from `renv`, as described [here](https://github.com/rstudio/renv/issues/1147) - may not be necessary, as this was only fixed with the step below)
+-   Add `runs-on: windows-latest` and commented out `runs-on: ubuntu-latest` (this fixed errors with loading packages listed in the `renv.lock` file when the GitHub action runs)
 
 To find examples of how other users on GitHub set up their `shiny-deploy.yaml` file, use the following search on GitHub (and modify as needed): `path:shiny-deploy.yaml` (can also add search details like `user:`, `org:`, etc.)
 
